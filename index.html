@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science 1 - First Year Practical Work</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #5a8ef0, #89c2d9);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 1em;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .tp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tp-card {
+            background: linear-gradient(135deg, #f9f9f9, #e8e8e8);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .tp-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: #5a8ef0;
+        }
+
+        .tp-card .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .tp-card h2 {
+            color: #5a8ef0;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .tp-card p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .tp-card .btn {
+            background: #5a8ef0;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: inline-block;
+        }
+
+        .tp-card:hover .btn {
+            background: #4077d6;
+        }
+
+        .footer {
+            background: #f9f9f9;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .instructor-info {
+            margin-bottom: 20px;
+        }
+
+        .instructor-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .instructor-info p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: white;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn.linkedin { color: #0e76a8; }
+        .social-btn.github { color: #333; }
+        .social-btn.email { color: #D44638; }
+
+        .university-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .tp-card h2 {
+                font-size: 1.5em;
+            }
+
+            .tp-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Computer Science 1</h1>
+            <p>First Year Practical Work</p>
+            <p class="subtitle">Interactive Python Programming Sessions</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>Welcome to the Computer Science practical sessions! Select a TP session below to begin your learning journey.</p>
+            </div>
+
+            <div class="tp-grid">
+                <a href="tp01.html" class="tp-card">
+                    <div class="icon">📘</div>
+                    <h2>TP 01</h2>
+                    <p>Introduction to Algorithms & Python</p>
+                    <p style="font-size: 0.9em; color: #888;">
+                        Learn algorithmic thinking, variables, input/output, and write your first Python programs.
+                    </p>
+                    <span class="btn">Start TP01 →</span>
+                </a>
+
+                <a href="tp02/tp02.html" class="tp-card">
+                    <div class="icon">📗</div>
+                    <h2>TP 02</h2>
+                    <p>Python Basics Practice</p>
+                    <p style="font-size: 0.9em; color: #888;">
+                        Hands-on exercises covering fundamental Python concepts and programming techniques.
+                    </p>
+                    <span class="btn">Start TP02 →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="instructor-info">
+                <h3>👨‍🏫 Instructor</h3>
+                <p><strong>Djezzar Moncef</strong></p>
+                <p>AI & Data Science Master's Graduate</p>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/moncef-djezzar/" target="_blank" class="social-btn linkedin">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="https://github.com/DjezzarMoncef" target="_blank" class="social-btn github">
+                    <span>🐙</span> GitHub
+                </a>
+                <a href="mailto:djezzar.moncef@univ-ouargla.dz" class="social-btn email">
+                    <span>📧</span> Email
+                </a>
+            </div>
+
+            <div class="university-info">
+                <p><strong>Kasdi Merbah University - Ouargla</strong></p>
+                <p>Course: Computer Science 1 | Level: First Year</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
