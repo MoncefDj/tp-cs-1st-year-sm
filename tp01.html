@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TP1: Introduction to Algorithms & Python</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: Arial, sans-serif;
         margin: 0;
-        padding: 20px;
+        padding: 10px;
         background: linear-gradient(135deg, #f9f9f9, #e8e8e8);
         color: #333;
       }
@@ -22,11 +26,47 @@
         overflow: hidden;
       }
 
+      /* Navigation Buttons at Top */
+      .top-navigation {
+        background: #f9f9f9;
+        padding: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .nav-btn {
+        background: #5a8ef0;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .nav-btn:hover {
+        background: #4077d6;
+      }
+
+      .nav-btn.secondary {
+        background: #89c2d9;
+      }
+
+      .nav-btn.secondary:hover {
+        background: #6ba3be;
+      }
+
       .slide {
         display: none;
-        padding: 40px;
+        padding: 20px;
         text-align: center;
-        min-height: 400px;
+        min-height: 300px;
         animation: fadeIn 0.5s ease-in-out;
       }
 
@@ -38,38 +78,38 @@
         text-align: center;
         background: linear-gradient(135deg, #a8d8ea, #fce1e4);
         color: #444;
-        padding: 60px 40px;
+        padding: 30px 20px;
       }
 
       .title-slide h1 {
-        font-size: 2.5em;
-        margin-bottom: 20px;
+        font-size: 2em;
+        margin-bottom: 15px;
         color: #333;
       }
 
       .title-slide p {
-        font-size: 1.2em;
+        font-size: 1.1em;
         opacity: 0.9;
         color: #555;
       }
 
       h1 {
         color: #5a8ef0;
-        font-size: 2.5em;
-        margin-bottom: 30px;
-      }
-
-      h2 {
-        color: #5a8ef0;
         font-size: 2em;
         margin-bottom: 20px;
       }
 
+      h2 {
+        color: #5a8ef0;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+      }
+
       .content {
-        font-size: 1.2em;
+        font-size: 1.1em;
         line-height: 1.6;
         color: #555;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         text-align: left;
       }
       
@@ -77,9 +117,13 @@
         padding-left: 20px;
       }
 
+      .content ol {
+        padding-left: 20px;
+      }
+
       .navigation {
         text-align: center;
-        padding: 20px;
+        padding: 15px;
         background: #f9f9f9;
       }
 
@@ -90,7 +134,7 @@
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        margin: 0 10px;
+        margin: 5px;
         font-size: 1em;
         transition: background 0.3s ease;
       }
@@ -123,45 +167,29 @@
         padding: 15px;
         border-radius: 5px;
         font-family: monospace;
-        margin: 20px 0;
+        margin: 15px 0;
         white-space: pre-wrap;
         text-align: left;
         border-left: 4px solid #5a8ef0;
+        overflow-x: auto;
+        font-size: 0.95em;
       }
-      
-      #timer {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #5a8ef0;
-        color: white;
-        padding: 8px 15px;
-        border-radius: 8px;
-        font-size: 1.2em;
-        font-weight: bold;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        transition: background-color 0.5s ease;
-      }
-      
-      #timer.low-time {
-        background-color: #e76f51;
-      }
-      
+
       .feedback {
         text-align: center;
         margin-top: 10px;
         font-style: italic;
         color: #555;
         min-height: 20px;
+        font-size: 0.95em;
       }
       .feedback.success { color: #2a9d8f; font-weight: bold; }
       .feedback.error { color: #e76f51; font-weight: bold; }
 
       /* Presenter Info & Social Links Styles */
       .presenter-info {
-        margin-top: 30px;
-        padding: 20px;
+        margin-top: 20px;
+        padding: 15px;
         background: linear-gradient(135deg, #5a8ef0, #89c2d9);
         color: #ffffff;
         border-radius: 12px;
@@ -170,22 +198,22 @@
       }
       .presenter-header h3 {
         margin: 0;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1px;
         color: #fef9ef;
       }
-      .presenter-details { margin-top: 15px; }
+      .presenter-details { margin-top: 10px; }
       .presenter-name {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-weight: bold;
         margin: 0 0 5px;
         color: #ffffff;
       }
       .presenter-details p {
         margin: 5px 0;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         color: #eaf6fa;
       }
       .presenter-details strong {
@@ -195,8 +223,9 @@
       .social-links {
         display: flex;
         justify-content: center;
-        margin-top: 15px;
-        gap: 8px;
+        margin-top: 10px;
+        gap: 5px;
+        flex-wrap: wrap;
       }
       .social-btn {
         cursor: pointer;
@@ -215,20 +244,20 @@
         position: relative;
         text-decoration: none;
       }
-      .social-btn svg { height: 20px; width: 20px; margin-left: 0.3rem; }
+      .social-btn svg { height: 18px; width: 18px; margin-left: 0.3rem; }
       .social-btn span {
         width: 0px;
         overflow: hidden;
         transition: 0.3s;
         text-align: center;
         margin-left: 5px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.4;
       }
       .social-btn:hover {
         width: auto;
-        min-width: 120px;
-        padding-right: 10px;
+        min-width: 100px;
+        padding-right: 8px;
         border-radius: 5px;
       }
       .social-btn:hover span { padding: 2px; width: auto; }
@@ -238,29 +267,272 @@
 
       /* Sorting Algorithm Styles */
       .interactive-algorithm {
-        margin-top: 20px; padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; text-align: left;
+        margin-top: 15px; 
+        padding: 15px; 
+        border: 2px solid #e0e0e0; 
+        border-radius: 8px; 
+        text-align: left;
       }
-      .interactive-algorithm h4 { text-align: center; margin-top: 0; color: #333; }
+      .interactive-algorithm h4 { 
+        text-align: center; 
+        margin-top: 0; 
+        color: #333;
+        font-size: 1.1em;
+      }
       .number-container { margin-bottom: 10px; }
       .box {
-        background-color: #f3f4f6; border-radius: 5px; padding: 10px; min-height: 50px; display: flex; gap: 10px; align-items: center;
+        background-color: #f3f4f6; 
+        border-radius: 5px; 
+        padding: 10px; 
+        min-height: 50px; 
+        display: flex; 
+        gap: 10px; 
+        align-items: center;
+        flex-wrap: wrap;
       }
       .number-btn {
-        background-color: #5a8ef0; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.1em; font-weight: bold; cursor: default; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease;
+        background-color: #5a8ef0; 
+        color: white; 
+        border: none; 
+        border-radius: 50%; 
+        width: 40px; 
+        height: 40px; 
+        font-size: 1em; 
+        font-weight: bold; 
+        cursor: default; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        transition: background-color 0.3s ease;
       }
       .number-btn.highlight { background-color: #ffde59; color: #333; }
       .controls { text-align: center; margin-top: 15px; }
-      .step-btn { margin: 0 5px; }
+      .step-btn { margin: 5px; }
       
       /* Tea Algorithm Styles */
-      .tea-algorithm-interactive { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 10px; justify-content: space-between; }
-      .steps-container { flex: 1; min-width: 250px; }
-      .step-box { background-color: #f3f4f6; border: 2px dashed #ccc; border-radius: 8px; padding: 10px; min-height: 150px; display: flex; flex-direction: column; gap: 8px; transition: background-color 0.3s; }
+      .tea-algorithm-interactive { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 15px; 
+        margin-top: 10px; 
+        justify-content: space-between; 
+      }
+      .steps-container { flex: 1; min-width: 200px; }
+      .steps-container h4 {
+        font-size: 1em;
+        margin-bottom: 8px;
+      }
+      .step-box { 
+        background-color: #f3f4f6; 
+        border: 2px dashed #ccc; 
+        border-radius: 8px; 
+        padding: 10px; 
+        min-height: 150px; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 8px; 
+        transition: background-color 0.3s; 
+      }
       .step-box.drag-over { background-color: #e0e0e0; border-color: #5a8ef0; }
-      .step-item { background-color: #5a8ef0; color: white; padding: 10px; border-radius: 5px; cursor: grab; text-align: center; user-select: none; transition: background-color 0.3s; }
+      .step-item { 
+        background-color: #5a8ef0; 
+        color: white; 
+        padding: 10px; 
+        border-radius: 5px; 
+        cursor: grab; 
+        text-align: center; 
+        user-select: none; 
+        transition: background-color 0.3s;
+        font-size: 0.95em;
+      }
       .step-item:hover { background-color: #4077d6; }
       .step-item.dragging { opacity: 0.5; }
       .tea-controls { width: 100%; text-align: center; margin-top: 10px; }
+
+      /* Mobile Responsive Styles */
+      @media screen and (max-width: 768px) {
+        body {
+          padding: 5px;
+        }
+
+        .slide-container {
+          border-radius: 5px;
+        }
+
+        .top-navigation {
+          padding: 10px;
+          gap: 8px;
+        }
+
+        .nav-btn {
+          padding: 8px 15px;
+          font-size: 0.9em;
+        }
+
+        .slide {
+          padding: 15px;
+          min-height: 250px;
+        }
+
+        .title-slide {
+          padding: 20px 15px;
+        }
+
+        .title-slide h1 {
+          font-size: 1.5em;
+          margin-bottom: 10px;
+        }
+
+        .title-slide p {
+          font-size: 1em;
+        }
+
+        h1 {
+          font-size: 1.6em;
+          margin-bottom: 15px;
+        }
+
+        h2 {
+          font-size: 1.4em;
+          margin-bottom: 12px;
+        }
+
+        .content {
+          font-size: 1em;
+        }
+
+        .presenter-info {
+          padding: 12px;
+          margin-top: 15px;
+        }
+
+        .presenter-header h3 {
+          font-size: 1rem;
+        }
+
+        .presenter-name {
+          font-size: 1.2rem;
+        }
+
+        .presenter-details p {
+          font-size: 0.95rem;
+        }
+
+        .social-btn {
+          height: 36px;
+          width: 36px;
+        }
+
+        .social-btn svg {
+          height: 16px;
+          width: 16px;
+        }
+
+        .social-btn span {
+          font-size: 0.75rem;
+        }
+
+        .social-btn:hover {
+          min-width: 90px;
+          padding-right: 6px;
+        }
+
+        .code-block {
+          padding: 10px;
+          font-size: 0.85em;
+        }
+
+        .interactive-algorithm {
+          padding: 10px;
+        }
+
+        .interactive-algorithm h4 {
+          font-size: 1em;
+        }
+
+        .number-btn {
+          width: 35px;
+          height: 35px;
+          font-size: 0.9em;
+        }
+
+        .controls button {
+          padding: 8px 12px;
+          font-size: 0.9em;
+        }
+
+        .tea-algorithm-interactive {
+          gap: 10px;
+        }
+
+        .steps-container {
+          min-width: 100%;
+        }
+
+        .steps-container h4 {
+          font-size: 0.95em;
+        }
+
+        .step-item {
+          padding: 8px;
+          font-size: 0.9em;
+        }
+
+        .navigation {
+          padding: 12px;
+        }
+
+        button {
+          padding: 8px 15px;
+          font-size: 0.9em;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .title-slide h1 {
+          font-size: 1.3em;
+        }
+
+        h1 {
+          font-size: 1.4em;
+        }
+
+        h2 {
+          font-size: 1.2em;
+        }
+
+        .content {
+          font-size: 0.95em;
+        }
+
+        .presenter-name {
+          font-size: 1.1rem;
+        }
+
+        .presenter-details p {
+          font-size: 0.9rem;
+        }
+
+        .nav-btn {
+          padding: 7px 12px;
+          font-size: 0.85em;
+        }
+
+        .code-block {
+          font-size: 0.8em;
+          padding: 8px;
+        }
+
+        .number-btn {
+          width: 32px;
+          height: 32px;
+          font-size: 0.85em;
+        }
+
+        .step-item {
+          font-size: 0.85em;
+        }
+      }
 
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
@@ -269,9 +541,12 @@
     </style>
   </head>
   <body>
-    <div id="timer">90:00</div>
-
     <div class="slide-container">
+      <div class="top-navigation">
+        <a href="index.html" class="nav-btn">← Back to Main</a>
+        <a href="tp02/tp02.html" class="nav-btn secondary">Next: TP02 →</a>
+      </div>
+
       <div class="progress">
         <div class="progress-bar" id="progressBar"></div>
       </div>
@@ -477,22 +752,6 @@ print("Hello", name)
         else if (e.key === "ArrowLeft") prevSlide();
       });
       
-      function startTimer(durationInMinutes) {
-        let timeInSeconds = durationInMinutes * 60;
-        const timerDisplay = document.getElementById('timer');
-        const timerInterval = setInterval(() => {
-          const minutes = Math.floor(timeInSeconds / 60);
-          let seconds = timeInSeconds % 60;
-          seconds = seconds < 10 ? '0' + seconds : seconds;
-          timerDisplay.textContent = `${minutes}:${seconds}`;
-          if (timeInSeconds < 300) timerDisplay.classList.add('low-time');
-          if (--timeInSeconds < 0) {
-            clearInterval(timerInterval);
-            timerDisplay.textContent = "Time's up!";
-          }
-        }, 1000);
-      }
-      
       function setupInteractiveAlgorithm() {
         const unsortedBox = document.getElementById('unsorted-box');
         const sortedBox = document.getElementById('sorted-box');
@@ -622,7 +881,6 @@ print("Hello", name)
 
       document.addEventListener("DOMContentLoaded", () => {
         showSlide(0);
-        startTimer(90);
         setupInteractiveAlgorithm();
         setupTeaAlgorithm();
       });

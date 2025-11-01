@@ -14,12 +14,77 @@
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
 
+/* Navigation Buttons Styles */
+.top-navigation {
+  background: #f9f9f9;
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-btn {
+  background: #5a8ef0;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+}
+
+.nav-btn:hover {
+  background: #4077d6;
+  color: white;
+}
+
+.nav-btn.secondary {
+  background: #89c2d9;
+}
+
+.nav-btn.secondary:hover {
+  background: #6ba3be;
+}
+
+@media screen and (max-width: 768px) {
+  .top-navigation {
+    padding: 10px;
+    gap: 8px;
+  }
+  
+  .nav-btn {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-btn {
+    padding: 7px 12px;
+    font-size: 0.85em;
+  }
+}
+
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function () {
     // your code here
   });
 </script></head><body for="html-export">
+    <div class="top-navigation">
+      <a href="../index.html" class="nav-btn">← Back to Main</a>
+      <a href="../tp01.html" class="nav-btn secondary">← Previous: TP01</a>
+    </div>
     
     
       <div class="crossnote markdown-preview  ">
