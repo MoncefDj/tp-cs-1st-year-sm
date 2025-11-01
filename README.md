@@ -4,6 +4,8 @@
 
 A collection of HTML files for Computer Science practical sessions (TP) designed for first-year (SM) students. These materials cover fundamental programming concepts using Python.
 
+🌐 **Live Website:** [https://tpcssm.netlify.app/](https://tpcssm.netlify.app/)
+
 ## 📚 Contents
 
 ### TP1: Introduction to Algorithms & Python
