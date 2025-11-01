@@ -342,11 +342,15 @@
         cursor: grab; 
         text-align: center; 
         user-select: none; 
-        transition: background-color 0.3s;
+        transition: all 0.3s;
         font-size: 0.95em;
+        touch-action: manipulation;
       }
       .step-item:hover { background-color: #4077d6; }
       .step-item.dragging { opacity: 0.5; }
+      .step-item:active {
+        transform: scale(0.98);
+      }
       .tea-controls { width: 100%; text-align: center; margin-top: 10px; }
 
       /* Mobile Responsive Styles */
@@ -623,8 +627,8 @@
       <div class="slide">
         <h2>Icebreaker: Instruct a Robot</h2>
         <div class="content" style="text-align:center; margin-bottom: 10px;">
-            <p>An algorithm must be a precise sequence of steps. Can you put the steps for making tea in the correct order?</p>
-            <p>Drag the steps from "Available Steps" to "Robot's Algorithm".</p>
+            <p>An algorithm must be a precise sequence of steps. Can you put the steps for making a sandwich in the correct order?</p>
+            <p>Tap/Click the steps to move them to "Robot's Algorithm".</p>
         </div>
         <div class="tea-algorithm-interactive">
             <div class="steps-container">
@@ -816,7 +820,10 @@ print("Hello", name)
         const feedback = document.getElementById('tea-feedback');
         
         const steps = [
-            { id: 3, text: "Boil water" }, { id: 1, text: "Get a cup" }, { id: 4, text: "Pour water into cup" }, { id: 2, text: "Add tea bag to cup" }
+            { id: 1, text: "Get two slices of bread" },
+            { id: 2, text: "Put peanut butter on one slice" },
+            { id: 3, text: "Put jelly on the other slice" },
+            { id: 4, text: "Put the two slices together" }
         ];
         const correctOrder = "1,2,3,4";
 
@@ -827,15 +834,37 @@ print("Hello", name)
             feedback.className = 'feedback';
             
             steps.sort(() => Math.random() - 0.5).forEach(step => {
-                const stepEl = document.createElement('div');
-                stepEl.className = 'step-item';
-                stepEl.textContent = step.text;
-                stepEl.dataset.id = step.id;
-                stepEl.draggable = true;
-                availableBox.appendChild(stepEl);
+                createStepElement(step, availableBox);
             });
         }
 
+        function createStepElement(step, parentBox) {
+            const stepEl = document.createElement('div');
+            stepEl.className = 'step-item';
+            stepEl.textContent = step.text;
+            stepEl.dataset.id = step.id;
+            stepEl.draggable = true;
+            
+            // Click/tap to move to other box
+            stepEl.addEventListener('click', function() {
+                moveToOtherBox(this);
+            });
+            
+            stepEl.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                moveToOtherBox(this);
+            });
+            
+            parentBox.appendChild(stepEl);
+        }
+
+        function moveToOtherBox(item) {
+            const currentParent = item.parentElement;
+            const targetBox = currentParent === availableBox ? algorithmBox : availableBox;
+            targetBox.appendChild(item);
+        }
+
+        // Desktop drag and drop support
         document.addEventListener('dragstart', e => {
             if (e.target.classList.contains('step-item')) {
                 e.target.classList.add('dragging');
