@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP02: Python Exercises</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 10px;
+        background: linear-gradient(135deg, #f9f9f9, #e8e8e8);
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      /* Navigation Buttons */
+      .top-navigation {
+        background: #f9f9f9;
+        padding: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .nav-btn {
+        background: #5a8ef0;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .nav-btn:hover {
+        background: #4077d6;
+      }
+
+      .nav-btn.secondary {
+        background: #89c2d9;
+      }
+
+      .nav-btn.secondary:hover {
+        background: #6ba3be;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, #5a8ef0, #89c2d9);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0 0 10px 0;
+        font-size: 2em;
+      }
+
+      .header p {
+        margin: 0;
+        font-size: 1.1em;
+        opacity: 0.95;
+      }
+
+      /* Content */
+      .content {
+        padding: 30px 20px;
+      }
+
+      .exercise {
+        background: #f8f9fa;
+        border-left: 4px solid #5a8ef0;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 5px;
+        direction: rtl;
+        text-align: right;
+      }
+
+      .exercise h3 {
+        color: #5a8ef0;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .exercise h4 {
+        color: #333;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+      }
+
+      .exercise p {
+        margin: 10px 0;
+        font-size: 1.05em;
+      }
+
+      .exercise ul,
+      .exercise ol {
+        margin: 10px 0;
+        padding-right: 25px;
+      }
+
+      .exercise li {
+        margin: 8px 0;
+      }
+
+      .exercise strong {
+        color: #2c5aa0;
+      }
+
+      .exercise em {
+        color: #666;
+      }
+
+      .exercise code {
+        background: #e9ecef;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        font-size: 0.95em;
+        color: #d63384;
+      }
+
+      .code-block {
+        background: #272822;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        margin: 15px 0;
+        overflow-x: auto;
+        direction: ltr;
+        text-align: left;
+      }
+
+      .expected-output {
+        background: #e7f3ff;
+        border-left: 4px solid #2196f3;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+
+      hr {
+        border: none;
+        border-top: 2px solid #e0e0e0;
+        margin: 30px 0;
+      }
+
+      /* Footer */
+      .footer {
+        background: #f9f9f9;
+        padding: 20px;
+        text-align: center;
+        border-top: 2px solid #e0e0e0;
+        color: #666;
+      }
+
+      /* Mobile Responsive */
+      @media screen and (max-width: 768px) {
+        body {
+          padding: 5px;
+        }
+
+        .container {
+          border-radius: 5px;
+        }
+
+        .header h1 {
+          font-size: 1.5em;
+        }
+
+        .header p {
+          font-size: 1em;
+        }
+
+        .content {
+          padding: 20px 15px;
+        }
+
+        .exercise {
+          padding: 15px;
+        }
+
+        .exercise h3 {
+          font-size: 1.3em;
+        }
+
+        .exercise h4 {
+          font-size: 1.1em;
+        }
+
+        .nav-btn {
+          padding: 8px 15px;
+          font-size: 0.9em;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .header h1 {
+          font-size: 1.3em;
+        }
+
+        .exercise h3 {
+          font-size: 1.2em;
+        }
+
+        .nav-btn {
+          padding: 7px 12px;
+          font-size: 0.85em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- ! enable to see solutions -->
+      <div class="top-navigation">
+        <a href="../index.html" class="nav-btn">← Back to Main</a>
+        <button class="nav-btn secondary" disabled title="Disabled for now" tabindex="-1">View Solutions</button>
+      </div>
+      <!-- ! enable to see solutions -->
+
+      <div class="header">
+        <h1>TP02: Python Programming Exercises</h1>
+        <p>Practice Problems - Variables, Conditions, and Loops</p>
+      </div>
+
+      <div class="content">
+        <!-- Exercise 1 -->
+        <div class="exercise">
+          <h3><strong>التمرين 1: حساب مساحة مستطيل</strong></h3>
+          <p>
+            <strong>الهدف:</strong> إتقان قراءة المُدخلات من المستخدم، تحويل
+            أنواع البيانات، إجراء عمليات حسابية بسيطة، وطباعة النتائج بشكل منسق.
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>اكتب برنامجاً بلغة بايثون يقوم بالتالي:</p>
+          <ol>
+            <li>يطلب من المستخدم إدخال <strong>عرض</strong> المستطيل.</li>
+            <li>يطلب من المستخدم إدخال <strong>طول</strong> نفس المستطيل.</li>
+            <li>
+              يحسب <strong>مساحة</strong> المستطيل (المساحة = الطول × العرض).
+            </li>
+            <li>
+              يعرض النتيجة النهائية بصيغة واضحة، على سبيل المثال: "مساحة مستطيل
+              عرضه 5.5 وطوله 10.0 هي 55.0".
+            </li>
+          </ol>
+
+          <p>
+            خذ بضع لحظات لكتابة الكود. لا تقلق إن لم يكن مثالياً، فالمهم هو
+            المحاولة!
+          </p>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 2 -->
+        <div class="exercise">
+          <h3><strong>التمرين 2: التحقق من الأهلية العمرية</strong></h3>
+          <p>
+            <strong>الهدف:</strong> استخدام <code>if</code> و
+            <code>else</code> لاتخاذ قرار بناءً على شرط، مع تعزيز مهارات الإدخال
+            والتحويل واستخدام عوامل المقارنة.
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>اكتب برنامجاً بلغة بايثون يقوم بالتالي:</p>
+          <ol>
+            <li>يطلب من المستخدم إدخال عمره.</li>
+            <li>يتحقق مما إذا كان العمر 18 عاماً أو أكثر.</li>
+            <li>
+              إذا كان الشرط صحيحاً (العمر >= 18)، يطبع رسالة: "<strong
+                >أنت راشد.</strong
+              >"
+            </li>
+            <li>
+              وإلا (إذا كان الشرط خاطئاً)، يطبع رسالة: "<strong
+                >أنت قاصر.</strong
+              >"
+            </li>
+          </ol>
+
+          <p>خذ وقتك في التفكير وكتابة الحل.</p>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 3 -->
+        <div class="exercise">
+          <h3><strong>التمرين 3: نظام تقدير الدرجات</strong></h3>
+          <p>
+            <strong>الهدف:</strong> استخدام سلسلة
+            <code>if/elif/else</code> كاملة للتعامل مع حالات متعددة، والتدرب على
+            الشروط التي تتضمن نطاقات من الأرقام.
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>اكتب برنامجاً بلغة بايثون يقوم بالتالي:</p>
+          <ol>
+            <li>يطلب من المستخدم إدخال درجة طالب (رقم من 0 إلى 100).</li>
+            <li>
+              بناءً على الدرجة، يطبع التقدير المناسب وفقاً للقواعد التالية:
+              <ul>
+                <li>
+                  إذا كانت الدرجة 90 أو أعلى، يطبع "<strong
+                    >التقدير: ممتاز</strong
+                  >".
+                </li>
+                <li>
+                  إذا كانت الدرجة بين 80 و 89، يطبع "<strong
+                    >التقدير: جيد جداً</strong
+                  >".
+                </li>
+                <li>
+                  إذا كانت الدرجة بين 70 و 79، يطبع "<strong
+                    >التقدير: جيد</strong
+                  >".
+                </li>
+                <li>
+                  إذا كانت الدرجة بين 60 و 69، يطبع "<strong
+                    >التقدير: مقبول</strong
+                  >".
+                </li>
+                <li>
+                  إذا كانت الدرجة أقل من 60، يطبع "<strong>التقدير: راسب</strong
+                  >".
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <p>فكر جيداً في ترتيب الشروط. هذا مهم جداً في هذا التمرين.</p>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 4 -->
+        <div class="exercise">
+          <h3><strong>التمرين 4: العداد البسيط</strong></h3>
+          <p>
+            <strong>الهدف:</strong> فهم البنية الأساسية لحلقة
+            <code>while</code>: نقطة البداية (التهيئة)، الشرط، جسم الحلقة، وخطوة
+            التحديث لتجنب حلقة لا نهائية.
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>
+            اكتب برنامجاً بلغة بايثون يقوم بعدّ الأرقام من 1 إلى 5، ويطبع كل رقم
+            في سطر منفصل.
+          </p>
+
+          <div class="expected-output">
+            <strong>المخرجات المتوقعة:</strong>
+            <div class="code-block">
+              1
+              <br />
+              2
+              <br />
+              3
+              <br />
+              4
+              <br />
+              5
+            </div>
+          </div>
+
+          <p>
+            هذا التمرين هو "أهلاً بالعالم" الخاص بالحلقات التكرارية. خذ وقتك
+            لكتابة الكود.
+          </p>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 5 -->
+        <div class="exercise">
+          <h3><strong>التمرين 5: العدّ باستخدام حلقة for</strong></h3>
+          <p>
+            <strong>الهدف:</strong> فهم بنية حلقة <code>for</code> وكيفية
+            استخدام الدالة <code>range()</code> لتوليد سلسلة من الأرقام بشكل
+            فعال.
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>
+            لنحل <strong>نفس المشكلة السابقة</strong>، ولكن هذه المرة باستخدام
+            حلقة <code>for</code>. اكتب برنامجاً يقوم بعدّ الأرقام من 1 إلى 5،
+            ويطبع كل رقم في سطر منفصل.
+          </p>
+
+          <div class="expected-output">
+            <strong>المخرجات المتوقعة (نفسها):</strong>
+            <div class="code-block">
+              1
+              <br />
+              2
+              <br />
+              3
+              <br />
+              4
+              <br />
+              5
+            </div>
+          </div>
+
+          <p>خذ لحظة للتفكير في كيف يمكن أن تكون هذه الطريقة أبسط.</p>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 6 -->
+        <div class="exercise">
+          <h3><strong>التمرين 6: طباعة حروف الكلمة</strong></h3>
+          <p>
+            <strong>الهدف:</strong> تطبيق حلقة <code>for</code> للمرور على كل
+            عنصر في تسلسل غير رقمي (سلسلة نصية).
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>اكتب برنامجاً يقوم بالتالي:</p>
+          <ol>
+            <li>يطلب من المستخدم إدخال كلمة واحدة.</li>
+            <li>
+              يستخدم حلقة <code>for</code> للمرور على <strong>كل حرف</strong> من
+              حروف الكلمة.
+            </li>
+            <li>يطبع كل حرف على سطر منفصل.</li>
+          </ol>
+
+          <div class="expected-output">
+            <strong>مثال على المخرجات:</strong>
+            <p>
+              إذا أدخل المستخدم كلمة "<strong>بايثون</strong>"، يجب أن تكون
+              المخرجات:
+            </p>
+            <div class="code-block">
+              ب
+              <br />
+              ا
+              <br />
+              ي
+              <br />
+              ث
+              <br />
+              و
+              <br />
+              ن
+            </div>
+          </div>
+
+          <p>
+            فكر في مدى تشابه هذا مع التمرين السابق. ما هو الشيء الذي ستمر عليه
+            الحلقة هذه المرة بدلاً من <code>range()</code>؟
+          </p>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 7 -->
+        <div class="exercise">
+          <h3><strong>التمرين 7: البحث عن أول حرف محدد</strong></h3>
+          <p>
+            <strong>الهدف:</strong> استخدام <code>break</code> لإيقاف حلقة
+            تكرارية بشكل فوري عند تحقق شرط معين (العثور على ما نبحث عنه).
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>
+            اكتب برنامجاً يبحث عن أول ظهور لحرف 'س' في الجملة التالية:
+            <code>"هذه سلسلة من الكلمات"</code>.
+          </p>
+          <ul>
+            <li>
+              عندما يجد البرنامج حرف 'س'، يجب أن يطبع رسالة:
+              <code>"تم العثور على الحرف!"</code> ثم
+              <strong>يتوقف البحث فوراً</strong>.
+            </li>
+            <li>للتوضيح، أضف طباعة للحرف الذي يتم التحقق منه في كل دورة.</li>
+          </ul>
+
+          <p>
+            فكر كيف ستستخدم <code>if</code> داخل حلقة <code>for</code> لتحديد
+            متى يجب استدعاء <code>break</code>.
+          </p>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 8 -->
+        <div class="exercise">
+          <h3><strong>التمرين 8: إزالة الحروف المتحركة</strong></h3>
+          <p>
+            <strong>الهدف:</strong> استخدام <code>continue</code> لتخطي دورات
+            معينة في حلقة تكرارية بناءً على شرط، مع التدرب على بناء سلسلة نصية
+            جديدة.
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>
+            اكتب برنامجاً يقوم بفلترة جملة معينة لإزالة كل الحروف المتحركة
+            (Vowels). الحروف المتحركة التي سنعتبرها هي: 'ا', 'و', 'ي', 'أ', 'إ',
+            'آ'.
+          </p>
+          <ol>
+            <li>ابدأ بالجملة التالية: <code>"مبرمج بايثون محترف"</code>.</li>
+            <li>استخدم حلقة <code>for</code> للمرور على كل حرف.</li>
+            <li>
+              إذا كان الحرف أحد الحروف المتحركة، <strong>تخطاه</strong> وانتقل
+              إلى الحرف التالي.
+            </li>
+            <li>إذا لم يكن الحرف متحركاً، أضفه إلى سلسلة نصية جديدة.</li>
+            <li>
+              في النهاية، اطبع السلسلة النصية الجديدة التي تحتوي فقط على الحروف
+              الصامتة.
+            </li>
+          </ol>
+
+          <div class="expected-output">
+            <strong>المخرجات المتوقعة:</strong>
+            <div class="code-block">مبرمج بيثن محترف</div>
+            <p>(لاحظ كيف اختفت 'ا' و 'و' و 'و').</p>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Exercise 9 -->
+        <div class="exercise">
+          <h3><strong>التمرين 9: لعبة تخمين الرقم (تمرين شامل)</strong></h3>
+          <p>
+            <strong>الهدف:</strong> دمج المتغيرات، الحلقات التكرارية
+            (<code>while</code>)، الشروط (<code>if/elif/else</code>)،
+            الإدخال/الإخراج، والتحكم في الحلقة (<code>break</code>) لبناء برنامج
+            كامل.
+          </p>
+
+          <h4><strong>المطلوب:</strong></h4>
+          <p>اكتب برنامجاً يقوم بالتالي:</p>
+          <ol>
+            <li>
+              يختار البرنامج "رقماً سرياً" بين 1 و 10 (يمكنك وضعه مباشرة في
+              الكود في البداية).
+            </li>
+            <li>
+              يدخل البرنامج في حلقة تكرارية تطلب من المستخدم تخمين هذا الرقم.
+            </li>
+            <li>
+              في كل مرة يخمن فيها المستخدم:
+              <ul>
+                <li>
+                  إذا كان تخمينه <strong>أقل</strong> من الرقم السري، يطبع
+                  البرنامج: "<strong>أعلى!</strong>"
+                </li>
+                <li>
+                  إذا كان تخمينه <strong>أكبر</strong> من الرقم السري، يطبع
+                  البرنامج: "<strong>أدنى!</strong>"
+                </li>
+                <li>
+                  إذا كان تخمينه <strong>صحيحاً</strong>، يطبع البرنامج رسالة
+                  تهنئة مثل "<strong>أحسنت! لقد وجدت الرقم السري.</strong>" ثم
+                  <strong>يخرج من الحلقة</strong> لإنهاء اللعبة.
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <p>خذ وقتك الآن لتجميع كل القطع التي تعلمناها معاً.</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p><strong>Computer Science 1 - TP02</strong></p>
+        <p>Kasdi Merbah University - Ouargla</p>
+        <p>Instructor: Djezzar Moncef</p>
+      </div>
+    </div>
+  </body>
+</html>
