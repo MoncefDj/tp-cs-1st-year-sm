@@ -86,6 +86,18 @@
             margin-bottom: 40px;
         }
 
+        .tp-card-wrapper {
+            background: linear-gradient(135deg, #f9f9f9, #e8e8e8);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .tp-card-header {
+            margin-bottom: 20px;
+        }
+
         .tp-card {
             background: linear-gradient(135deg, #f9f9f9, #e8e8e8);
             border-radius: 15px;
@@ -138,6 +150,64 @@
 
         .tp-card:hover .btn {
             background: #4077d6;
+        }
+
+        /* TP02 Sub-options Styling */
+        .tp-sub-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sub-option-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-option-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .sub-option-btn .sub-icon {
+            font-size: 2em;
+            flex-shrink: 0;
+        }
+
+        .sub-option-btn .sub-text {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .sub-option-btn strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 3px;
+        }
+
+        .sub-option-btn small {
+            color: #888;
+            font-size: 0.85em;
+        }
+
+        .sub-option-btn.lesson:hover {
+            border-left: 4px solid #5a8ef0;
+        }
+
+        .sub-option-btn.exercises:hover {
+            border-left: 4px solid #f39c12;
+        }
+
+        .sub-option-btn.solutions:hover {
+            border-left: 4px solid #27ae60;
         }
 
         .footer {
@@ -217,6 +287,18 @@
             .tp-grid {
                 grid-template-columns: 1fr;
             }
+
+            .sub-option-btn {
+                padding: 12px 15px;
+            }
+
+            .sub-option-btn .sub-icon {
+                font-size: 1.5em;
+            }
+
+            .sub-option-btn strong {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -234,6 +316,7 @@
             </div>
 
             <div class="tp-grid">
+                <!-- TP 01 Card -->
                 <a href="tp01.html" class="tp-card">
                     <div class="icon">📘</div>
                     <h2>TP 01</h2>
@@ -244,15 +327,40 @@
                     <span class="btn">Start TP01 →</span>
                 </a>
 
-                <a href="tp02/tp02-exercises.html" class="tp-card">
-                    <div class="icon">📗</div>
-                    <h2>TP 02</h2>
-                    <p>Python Basics Practice</p>
-                    <p style="font-size: 0.9em; color: #888;">
-                        Hands-on exercises covering fundamental Python concepts and programming techniques.
-                    </p>
-                    <span class="btn">Start TP02 →</span>
-                </a>
+                <!-- TP 02 Card with Sub-options -->
+                <div class="tp-card-wrapper">
+                    <div class="tp-card-header">
+                        <div class="icon">📗</div>
+                        <h2>TP 02</h2>
+                        <p>Python Fundamentals</p>
+                        <p style="font-size: 0.9em; color: #888; margin-bottom: 20px;">
+                            Master Python basics: variables, conditions, loops, and string operations.
+                        </p>
+                    </div>
+                    <div class="tp-sub-options">
+                        <a href="tp02/tp02-lesson.html" class="sub-option-btn lesson">
+                            <span class="sub-icon">📚</span>
+                            <div class="sub-text">
+                                <strong>Lessons</strong>
+                                <small>Complete Arabic tutorial</small>
+                            </div>
+                        </a>
+                        <a href="tp02/tp02-exercises.html" class="sub-option-btn exercises">
+                            <span class="sub-icon">✏️</span>
+                            <div class="sub-text">
+                                <strong>Exercises</strong>
+                                <small>Practice problems</small>
+                            </div>
+                        </a>
+                        <a class="sub-option-btn solutions" style="opacity: 0.5; pointer-events: none; cursor: not-allowed;">
+                            <span class="sub-icon">🔒</span>
+                            <div class="sub-text">
+                                <strong>Solutions</strong>
+                                <small>Locked for now</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 

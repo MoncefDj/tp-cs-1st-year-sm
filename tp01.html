@@ -28,38 +28,42 @@
 
       /* Navigation Buttons at Top */
       .top-navigation {
-        background: #f9f9f9;
-        padding: 15px;
+        background: linear-gradient(135deg, #5a8ef0, #89c2d9);
+        padding: 20px;
         display: flex;
         gap: 10px;
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
         flex-wrap: wrap;
         border-bottom: 2px solid #e0e0e0;
       }
 
       .nav-btn {
-        background: #5a8ef0;
-        color: white;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 1em;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
         text-decoration: none;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
       }
 
       .nav-btn:hover {
-        background: #4077d6;
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
 
       .nav-btn.secondary {
-        background: #89c2d9;
-      }
-
-      .nav-btn.secondary:hover {
-        background: #6ba3be;
+        background: rgba(255, 255, 255, 0.9);
+        color: #5a8ef0;
+        font-weight: 600;
       }
 
       .slide {
@@ -547,8 +551,8 @@
   <body>
     <div class="slide-container">
       <div class="top-navigation">
-        <a href="index.html" class="nav-btn">← Back to Main</a>
-        <a href="tp02/tp02-exercises.html" class="nav-btn secondary">Next: TP02 →</a>
+        <a href="index.html" class="nav-btn secondary">🏠 Home</a>
+        <a href="tp02/tp02-exercises.html" class="nav-btn">Next: TP02 →</a>
       </div>
 
       <div class="progress">

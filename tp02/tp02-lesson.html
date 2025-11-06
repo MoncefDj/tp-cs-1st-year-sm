@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP02: دروس بايثون للمبتدئين</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background: linear-gradient(135deg, #f9f9f9, #e8e8e8);
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Navigation */
+        .top-navigation {
+            background: linear-gradient(135deg, #5a8ef0, #89c2d9);
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn.primary {
+            background: #5a8ef0;
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-btn.primary:hover {
+            background: #4077d6;
+        }
+
+        .nav-btn.home {
+            background: rgba(255, 255, 255, 0.9);
+            color: #5a8ef0;
+            font-weight: 600;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #5a8ef0, #89c2d9);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px 30px;
+        }
+
+        .intro {
+            background: #e7f3ff;
+            border-right: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        .intro h2 {
+            color: #2196F3;
+            margin-top: 0;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #5a8ef0;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #5a8ef0;
+        }
+
+        .section h3 {
+            color: #2c5aa0;
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section h4 {
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        .section ul, .section ol {
+            margin: 15px 0;
+            padding-right: 30px;
+        }
+
+        .section li {
+            margin: 10px 0;
+            font-size: 1.05em;
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #c7254e;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .code-block {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.6;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block .comment {
+            color: #e6d581;
+        }
+
+        .code-block .string {
+            color: #e6db74;
+        }
+
+        .code-block .keyword {
+            color: #66d9ef;
+        }
+
+        .code-block .function {
+            color: #a6e22e;
+        }
+
+        .code-block .number {
+            color: #ae81ff;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box strong {
+            color: #856404;
+        }
+
+        .tip-box {
+            background: #d4edda;
+            border-right: 4px solid #28a745;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tip-box::before {
+            content: "💡 نصيحة: ";
+            font-weight: bold;
+            color: #155724;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-right: 4px solid #dc3545;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box::before {
+            content: "⚠️ تحذير: ";
+            font-weight: bold;
+            color: #721c24;
+        }
+
+        .example-box {
+            background: #e7f3ff;
+            border-right: 4px solid #2196F3;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example-box h4 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table th {
+            background: #5a8ef0;
+            color: white;
+            padding: 12px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .footer {
+            background: #f9f9f9;
+            padding: 25px;
+            text-align: center;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 40px 0;
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            .content {
+                padding: 25px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section h2 {
+                font-size: 1.6em;
+            }
+
+            .section h3 {
+                font-size: 1.3em;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+
+            .top-navigation {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .nav-group {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .section h2 {
+                font-size: 1.4em;
+            }
+
+            .nav-btn {
+                padding: 7px 12px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-navigation">
+            <div class="nav-group">
+                <a href="../index.html" class="nav-btn home">🏠 الرئيسية</a>
+            </div>
+            <div class="nav-group">
+                <a href="tp02-lesson.html" class="nav-btn primary">📚 الدروس</a>
+                <a href="tp02-exercises.html" class="nav-btn">✏️ التمارين</a>
+                <a href="tp02.html" class="nav-btn" style="opacity: 0.5; pointer-events: none; cursor: not-allowed;">🔒 الحلول</a>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1>📚 دروس بايثون للمبتدئين</h1>
+            <p>دليل شامل لتعلم أساسيات البرمجة بلغة بايثون</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>مرحباً بك في عالم البرمجة! 👋</h2>
+                <p>
+                    هذا الدرس مصمم خصيصاً للمبتدئين الذين لم يسبق لهم البرمجة من قبل. 
+                    سنبدأ من الصفر ونشرح كل شيء بالتفصيل. لا تقلق إذا لم تفهم شيئاً في البداية، 
+                    البرمجة تحتاج إلى وقت وممارسة. الأهم هو أن تحاول وتتدرب!
+                </p>
+            </div>
+
+            <!-- Section 1: Introduction -->
+            <div class="section">
+                <h2>🌟 ما هي لغة بايثون؟</h2>
+                <p>
+                    <strong>بايثون (Python)</strong> هي لغة برمجة سهلة التعلم وقوية في نفس الوقت. 
+                    تُستخدم في مجالات كثيرة مثل تطوير المواقع، الذكاء الاصطناعي، تحليل البيانات، وغيرها.
+                </p>
+                <p>
+                    ما يميز بايثون:
+                </p>
+                <ul>
+                    <li>سهلة القراءة والفهم (تشبه اللغة الإنجليزية)</li>
+                    <li>لا تحتاج إلى كتابة الكثير من الأكواد</li>
+                    <li>تحتوي على الكثير من المكتبات الجاهزة</li>
+                    <li>مجانية ومفتوحة المصدر</li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <!-- Section 2: Variables -->
+            <div class="section">
+                <h2>📦 المتغيرات (Variables)</h2>
+                
+                <h3>ما هو المتغير؟</h3>
+                <p>
+                    المتغير هو مثل "صندوق" أو "وعاء" نخزن فيه معلومة معينة. 
+                    نعطي لهذا الصندوق اسماً حتى نستطيع استخدامه لاحقاً.
+                </p>
+
+                <div class="example-box">
+                    <h4>مثال بسيط:</h4>
+                    <p>تخيل أن لديك صندوقاً تكتب عليه "العمر" وتضع فيه الرقم 20.</p>
+                    <div class="code-block">age = <span class="number">20</span></div>
+                    <p>الآن كلما احتجت لمعرفة العمر، تنظر في الصندوق المسمى "age".</p>
+                </div>
+
+                <h3>كيف نُنشئ متغيراً؟</h3>
+                <p>في بايثون، إنشاء متغير سهل جداً:</p>
+                <div class="code-block"><span class="comment"># صيغة إنشاء المتغير</span><br>اسم_المتغير = القيمة<br><br><span class="comment"># أمثلة:</span><br>name = <span class="string">"محمد"</span><br>age = <span class="number">25</span><br>height = <span class="number">1.75</span><br>is_student = <span class="keyword">True</span></div>
+
+                <h3>أنواع البيانات الأساسية</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>النوع</th>
+                            <th>الاسم بالإنجليزية</th>
+                            <th>الوصف</th>
+                            <th>مثال</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>أعداد صحيحة</td>
+                            <td>int</td>
+                            <td>أرقام بدون فواصل عشرية</td>
+                            <td><code>10, -5, 0</code></td>
+                        </tr>
+                        <tr>
+                            <td>أعداد عشرية</td>
+                            <td>float</td>
+                            <td>أرقام بفواصل عشرية</td>
+                            <td><code>3.14, -0.5</code></td>
+                        </tr>
+                        <tr>
+                            <td>نصوص</td>
+                            <td>str</td>
+                            <td>حروف وكلمات بين علامات تنصيص</td>
+                            <td><code>"مرحبا", 'بايثون'</code></td>
+                        </tr>
+                        <tr>
+                            <td>قيم منطقية</td>
+                            <td>bool</td>
+                            <td>صح أو خطأ فقط</td>
+                            <td><code>True, False</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box">
+                    اختر أسماء واضحة للمتغيرات. بدلاً من <code>x</code>، استخدم <code>age</code> أو <code>al_omr</code>.
+                </div>
+
+                <div class="warning-box">
+                    أسماء المتغيرات لا يمكن أن تبدأ برقم ولا تحتوي على مسافات. استخدم _ بدلاً من المسافة.
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Section 3: Input and Output -->
+            <div class="section">
+                <h2>⌨️ الإدخال والإخراج</h2>
+
+                <h3>1. طباعة المعلومات على الشاشة - <code>print()</code></h3>
+                <p>
+                    الدالة <code>print()</code> تستخدم لعرض المعلومات على الشاشة:
+                </p>
+                <div class="code-block"><span class="comment"># طباعة نص</span><br><span class="function">print</span>(<span class="string">"مرحباً بك في بايثون!"</span>)<br><br><span class="comment"># طباعة رقم</span><br><span class="function">print</span>(<span class="number">42</span>)<br><br><span class="comment"># طباعة متغير</span><br>name = <span class="string">"أحمد"</span><br><span class="function">print</span>(name)<br><br><span class="comment"># طباعة عدة أشياء معاً</span><br><span class="function">print</span>(<span class="string">"الاسم:"</span>, name)</div>
+
+                <h3>2. استقبال المدخلات من المستخدم - <code>input()</code></h3>
+                <p>
+                    الدالة <code>input()</code> تطلب من المستخدم إدخال معلومة:
+                </p>
+                <div class="code-block"><span class="comment"># طلب إدخال من المستخدم</span><br>name = <span class="function">input</span>(<span class="string">"ما اسمك؟ "</span>)<br><span class="function">print</span>(<span class="string">"مرحباً"</span>, name)</div>
+
+                <div class="warning-box">
+                    <strong>مهم جداً:</strong> الدالة <code>input()</code> دائماً تُرجع نصاً (str)، 
+                    حتى لو أدخل المستخدم رقماً! يجب تحويله إلى رقم قبل إجراء عمليات حسابية.
+                </div>
+
+                <h3>3. تحويل أنواع البيانات</h3>
+                <p>لتحويل النص إلى رقم، نستخدم:</p>
+                <div class="code-block"><span class="comment"># تحويل إلى عدد صحيح</span><br>age = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"كم عمرك؟ "</span>))<br><br><span class="comment"># تحويل إلى عدد عشري</span><br>height = <span class="function">float</span>(<span class="function">input</span>(<span class="string">"ما طولك؟ "</span>))<br><br><span class="comment"># الآن يمكننا إجراء عمليات حسابية</span><br><span class="function">print</span>(<span class="string">"بعد 10 سنوات ستكون في عمر"</span>, age + <span class="number">10</span>)</div>
+
+                <h3>4. السلاسل النصية المنسقة (f-strings)</h3>
+                <p>طريقة أنيقة لدمج المتغيرات مع النصوص:</p>
+                <div class="code-block">name = <span class="string">"سارة"</span><br>age = <span class="number">22</span><br><br><span class="comment"># الطريقة القديمة (معقدة)</span><br><span class="function">print</span>(<span class="string">"اسمي"</span>, name, <span class="string">"وعمري"</span>, age)<br><br><span class="comment"># الطريقة الحديثة (f-string) - أسهل وأوضح</span><br><span class="function">print</span>(<span class="string">f"اسمي {name} وعمري {age}"</span>)<br><br><span class="comment"># يمكن إجراء عمليات داخل الأقواس</span><br><span class="function">print</span>(<span class="string">f"بعد 5 سنوات سأكون في عمر {age + 5}"</span>)</div>
+
+                <div class="tip-box">
+                    لاحظ الحرف <code>f</code> قبل علامات التنصيص. هذا ما يجعلها f-string!
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Section 4: Operators -->
+            <div class="section">
+                <h2>🔢 العمليات الحسابية والمقارنة</h2>
+
+                <h3>1. العمليات الحسابية</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>العملية</th>
+                            <th>الرمز</th>
+                            <th>مثال</th>
+                            <th>النتيجة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>الجمع</td>
+                            <td><code>+</code></td>
+                            <td><code>5 + 3</code></td>
+                            <td><code>8</code></td>
+                        </tr>
+                        <tr>
+                            <td>الطرح</td>
+                            <td><code>-</code></td>
+                            <td><code>10 - 4</code></td>
+                            <td><code>6</code></td>
+                        </tr>
+                        <tr>
+                            <td>الضرب</td>
+                            <td><code>*</code></td>
+                            <td><code>7 * 2</code></td>
+                            <td><code>14</code></td>
+                        </tr>
+                        <tr>
+                            <td>القسمة</td>
+                            <td><code>/</code></td>
+                            <td><code>15 / 3</code></td>
+                            <td><code>5.0</code></td>
+                        </tr>
+                        <tr>
+                            <td>الأس (القوة)</td>
+                            <td><code>**</code></td>
+                            <td><code>2 ** 3</code></td>
+                            <td><code>8</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block"><span class="comment"># أمثلة على العمليات الحسابية</span><br>width = <span class="number">5</span><br>length = <span class="number">10</span><br>area = width * length<br><span class="function">print</span>(<span class="string">f"المساحة = {area}"</span>)  <span class="comment"># النتيجة: 50</span><br><br><span class="comment"># يمكن استخدام الأقواس لتحديد الأولوية</span><br>result = (<span class="number">5</span> + <span class="number">3</span>) * <span class="number">2</span>  <span class="comment"># النتيجة: 16</span></div>
+
+                <h3>2. عمليات المقارنة</h3>
+                <p>تُستخدم للمقارنة بين قيمتين، وتُرجع <code>True</code> أو <code>False</code>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>العملية</th>
+                            <th>الرمز</th>
+                            <th>مثال</th>
+                            <th>النتيجة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>يساوي</td>
+                            <td><code>==</code></td>
+                            <td><code>5 == 5</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td>لا يساوي</td>
+                            <td><code>!=</code></td>
+                            <td><code>5 != 3</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td>أكبر من</td>
+                            <td><code>&gt;</code></td>
+                            <td><code>7 &gt; 3</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td>أصغر من</td>
+                            <td><code>&lt;</code></td>
+                            <td><code>2 &lt; 5</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td>أكبر من أو يساوي</td>
+                            <td><code>&gt;=</code></td>
+                            <td><code>5 &gt;= 5</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td>أصغر من أو يساوي</td>
+                            <td><code>&lt;=</code></td>
+                            <td><code>3 &lt;= 2</code></td>
+                            <td><code>False</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box">
+                    لاحظ الفرق: <code>=</code> للإسناد (وضع قيمة في متغير)، و <code>==</code> للمقارنة!
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Section 5: Conditional Statements -->
+            <div class="section">
+                <h2>🔀 الجمل الشرطية (if, elif, else)</h2>
+
+                <h3>ما هي الجمل الشرطية؟</h3>
+                <p>
+                    الجمل الشرطية تسمح للبرنامج باتخاذ قرارات. تخيل أنك تقول:
+                    "إذا كان الجو ممطراً، خذ مظلة، وإلا ارتدِ نظارة شمسية"
+                </p>
+
+                <h3>1. الصيغة الأساسية - <code>if</code></h3>
+                <div class="code-block"><span class="comment"># الصيغة العامة</span><br><span class="keyword">if</span> الشرط:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># الكود الذي سيُنفذ إذا كان الشرط صحيحاً</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<br><span class="comment"># مثال حقيقي</span><br>age = <span class="number">20</span><br><span class="keyword">if</span> age >= <span class="number">18</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"أنت راشد"</span>)</div>
+
+                <div class="highlight-box">
+                    <strong>المسافة البادئة (Indentation) مهمة جداً!</strong>
+                    <br>في بايثون، المسافات في بداية السطر ليست للتزيين، بل هي جزء أساسي من البرنامج.
+                    استخدم 4 مسافات أو Tab واحدة قبل الكود داخل if.
+                </div>
+
+                <h3>2. إضافة حالة أخرى - <code>if/else</code></h3>
+                <div class="code-block">age = <span class="number">16</span><br><span class="keyword">if</span> age >= <span class="number">18</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"أنت راشد"</span>)<br><span class="keyword">else</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"أنت قاصر"</span>)</div>
+
+                <h3>3. حالات متعددة - <code>if/elif/else</code></h3>
+                <p>عندما تكون لديك أكثر من حالتين:</p>
+                <div class="code-block">grade = <span class="number">85</span><br><br><span class="keyword">if</span> grade >= <span class="number">90</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"ممتاز"</span>)<br><span class="keyword">elif</span> grade >= <span class="number">80</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"جيد جداً"</span>)<br><span class="keyword">elif</span> grade >= <span class="number">70</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"جيد"</span>)<br><span class="keyword">elif</span> grade >= <span class="number">60</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"مقبول"</span>)<br><span class="keyword">else</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"راسب"</span>)</div>
+
+                <div class="example-box">
+                    <h4>كيف يعمل البرنامج؟</h4>
+                    <ol>
+                        <li>يتحقق من الشرط الأول (<code>grade >= 90</code>)</li>
+                        <li>إذا كان صحيحاً، يُنفذ الكود ويتوقف</li>
+                        <li>إذا كان خاطئاً، ينتقل للشرط التالي (<code>elif</code>)</li>
+                        <li>يستمر حتى يجد شرطاً صحيحاً، أو يصل لـ <code>else</code></li>
+                    </ol>
+                </div>
+
+                <div class="tip-box">
+                    رتب الشروط من الأكثر تحديداً إلى الأقل. ابدأ بالحالات الخاصة ثم انتقل للعامة.
+                </div>
+
+                <h3>4. الشروط المركبة</h3>
+                <p>يمكنك دمج عدة شروط معاً:</p>
+                <div class="code-block"><span class="comment"># استخدام and (و) - يجب أن يتحقق كلا الشرطين</span><br>age = <span class="number">20</span><br>has_license = <span class="keyword">True</span><br><span class="keyword">if</span> age >= <span class="number">18</span> <span class="keyword">and</span> has_license:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"يمكنك القيادة"</span>)<br><br><span class="comment"># استخدام or (أو) - يكفي أن يتحقق أحد الشرطين</span><br><span class="keyword">if</span> age < <span class="number">12</span> <span class="keyword">or</span> age > <span class="number">65</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"تذكرة مخفضة"</span>)</div>
+            </div>
+
+            <hr>
+
+            <!-- Section 6: Loops -->
+            <div class="section">
+                <h2>🔁 الحلقات التكرارية (Loops)</h2>
+
+                <h3>لماذا نحتاج الحلقات؟</h3>
+                <p>
+                    تخيل أنك تريد طباعة "مرحباً" 100 مرة. هل ستكتب <code>print("مرحباً")</code> 100 مرة؟
+                    بالطبع لا! الحلقات تُستخدم لتكرار كود معين عدة مرات.
+                </p>
+
+                <h3>1. حلقة <code>while</code></h3>
+                <p>تُكرر الكود <strong>طالما أن</strong> الشرط صحيح:</p>
+
+                <div class="code-block"><span class="comment"># الصيغة العامة</span><br><span class="keyword">while</span> الشرط:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># الكود المُكرر</span><br><br><span class="comment"># مثال: العد من 1 إلى 5</span><br>number = <span class="number">1</span><br><span class="keyword">while</span> number <= <span class="number">5</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(number)<br>&nbsp;&nbsp;&nbsp;&nbsp;number = number + <span class="number">1</span>  <span class="comment"># أو: number += 1</span></div>
+
+                <div class="warning-box">
+                    <strong>احذر من الحلقات اللانهائية!</strong>
+                    <br>إذا نسيت زيادة المتغير (<code>number += 1</code>)، سيستمر البرنامج في العمل إلى الأبد!
+                </div>
+
+                <h4>مكونات حلقة while:</h4>
+                <ol>
+                    <li><strong>التهيئة:</strong> تحديد قيمة أولية للمتغير (<code>number = 1</code>)</li>
+                    <li><strong>الشرط:</strong> متى تستمر الحلقة (<code>number <= 5</code>)</li>
+                    <li><strong>التحديث:</strong> تغيير المتغير في كل دورة (<code>number += 1</code>)</li>
+                </ol>
+
+                <h3>2. حلقة <code>for</code></h3>
+                <p>
+                    أسهل وأكثر شيوعاً. تُستخدم عندما تعرف <strong>عدد مرات التكرار</strong> مسبقاً:
+                </p>
+
+                <div class="code-block"><span class="comment"># الصيغة العامة</span><br><span class="keyword">for</span> متغير <span class="keyword">in</span> مجموعة:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># الكود المُكرر</span><br><br><span class="comment"># مثال: العد من 1 إلى 5</span><br><span class="keyword">for</span> number <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="number">6</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(number)</div>
+
+                <h4>فهم الدالة <code>range()</code></h4>
+                <p>هذه دالة مهمة جداً تُنشئ سلسلة من الأرقام:</p>
+                <div class="code-block"><span class="comment"># range(stop) - من 0 إلى stop-1</span><br><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">5</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(i)&nbsp;&nbsp;<span class="comment"># يطبع: 0, 1, 2, 3, 4</span><br><br><span class="comment"># range(start, stop) - من start إلى stop-1</span><br><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="number">6</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(i)&nbsp;&nbsp;<span class="comment"># يطبع: 1, 2, 3, 4, 5</span><br><br><span class="comment"># range(start, stop, step) - مع تحديد الخطوة</span><br><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="number">2</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(i)&nbsp;&nbsp;<span class="comment"># يطبع: 0, 2, 4, 6, 8</span></div>
+
+                <div class="highlight-box">
+                    <strong>ملاحظة مهمة:</strong> <code>range(1, 6)</code> تنتج الأرقام من 1 إلى 5 فقط (لا تشمل 6)!
+                </div>
+
+                <h3>3. المرور على النصوص</h3>
+                <p>يمكنك استخدام <code>for</code> للمرور على كل حرف في نص:</p>
+                <div class="code-block">word = <span class="string">"بايثون"</span><br><span class="keyword">for</span> letter <span class="keyword">in</span> word:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(letter)<br>&nbsp;&nbsp;&nbsp;&nbsp;<br><span class="comment"># النتيجة:</span><br><span class="comment"># ب</span><br><span class="comment"># ا</span><br><span class="comment"># ي</span><br><span class="comment"># ث</span><br><span class="comment"># و</span><br><span class="comment"># ن</span></div>
+
+                <h3>4. التحكم في الحلقات</h3>
+
+                <h4>أ) <code>break</code> - الخروج من الحلقة</h4>
+                <p>يوقف الحلقة فوراً ويخرج منها:</p>
+                <div class="code-block"><span class="comment"># البحث عن حرف معين</span><br>sentence = <span class="string">"هذه سلسلة من الكلمات"</span><br><span class="keyword">for</span> letter <span class="keyword">in</span> sentence:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> letter == <span class="string">'س'</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"وجدت الحرف!"</span>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>&nbsp;&nbsp;<span class="comment"># توقف الحلقة هنا</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"التحقق من: {letter}"</span>)</div>
+
+                <h4>ب) <code>continue</code> - تخطي الدورة الحالية</h4>
+                <p>يتجاوز بقية الكود ويبدأ الدورة التالية:</p>
+                <div class="code-block"><span class="comment"># طباعة الأرقام الفردية فقط</span><br><span class="keyword">for</span> num <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="number">11</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>:&nbsp;&nbsp;<span class="comment"># إذا كان الرقم زوجياً</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">continue</span>&nbsp;&nbsp;<span class="comment"># تخطى هذا الرقم</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(num)&nbsp;&nbsp;<span class="comment"># يطبع: 1, 3, 5, 7, 9</span></div>
+
+                <div class="example-box">
+                    <h4>الفرق بين break و continue:</h4>
+                    <ul>
+                        <li><code>break</code>: يخرج من الحلقة تماماً</li>
+                        <li><code>continue</code>: يتخطى الدورة الحالية فقط ويستمر في الحلقة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Section 7: String Operations -->
+            <div class="section">
+                <h2>📝 العمليات على النصوص</h2>
+
+                <h3>1. دمج النصوص (Concatenation)</h3>
+                <div class="code-block"><span class="comment"># استخدام +</span><br>first_name = <span class="string">"محمد"</span><br>last_name = <span class="string">"أحمد"</span><br>full_name = first_name + <span class="string">" "</span> + last_name<br><span class="function">print</span>(full_name)  <span class="comment"># محمد أحمد</span><br><br><span class="comment"># إضافة نص إلى متغير موجود</span><br>message = <span class="string">"مرحباً"</span><br>message = message + <span class="string">" بك"</span><br><span class="comment"># أو بطريقة مختصرة:</span><br>message += <span class="string">" في بايثون"</span><br><span class="function">print</span>(message)  <span class="comment"># مرحباً بك في بايثون</span></div>
+
+                <h3>2. التحقق من وجود نص داخل نص آخر</h3>
+                <div class="code-block">sentence = <span class="string">"أحب تعلم البرمجة"</span><br><br><span class="comment"># التحقق من وجود كلمة</span><br><span class="keyword">if</span> <span class="string">"البرمجة"</span> <span class="keyword">in</span> sentence:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"نعم، الكلمة موجودة"</span>)<br><br><span class="comment"># التحقق من عدم وجود كلمة</span><br><span class="keyword">if</span> <span class="string">"الرياضة"</span> <span class="keyword">not in</span> sentence:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"لا، الكلمة غير موجودة"</span>)</div>
+
+                <h3>3. طول النص</h3>
+                <div class="code-block">text = <span class="string">"بايثون"</span><br>length = <span class="function">len</span>(text)<br><span class="function">print</span>(length)&nbsp;&nbsp;<span class="comment"># 6 أحرف</span></div>
+
+                <h3>4. بناء نص تدريجياً في حلقة</h3>
+                <div class="code-block"><span class="comment"># إزالة الحروف المتحركة من جملة</span><br>sentence = <span class="string">"مبرمج بايثون محترف"</span><br>vowels = <span class="string">"اويأإآ"</span><br>new_sentence = <span class="string">""</span>&nbsp;&nbsp;<span class="comment"># نبدأ بنص فارغ</span><br><br><span class="keyword">for</span> letter <span class="keyword">in</span> sentence:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> letter <span class="keyword">not in</span> vowels:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_sentence += letter&nbsp;&nbsp;<span class="comment"># نضيف الحرف</span><br><br><span class="function">print</span>(new_sentence)&nbsp;&nbsp;<span class="comment"># مبرمج بيثن محترف</span></div>
+            </div>
+
+            <hr>
+
+            <!-- Section 8: Common Patterns -->
+            <div class="section">
+                <h2>🎯 أنماط برمجية شائعة</h2>
+
+                <h3>1. نمط التراكم (Accumulator Pattern)</h3>
+                <p>نبدأ بقيمة صفرية ونضيف عليها في كل دورة:</p>
+                <div class="code-block"><span class="comment"># حساب مجموع الأرقام من 1 إلى 10</span><br>total = <span class="number">0</span>&nbsp;&nbsp;<span class="comment"># المُجمِّع</span><br><span class="keyword">for</span> num <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="number">11</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += num&nbsp;&nbsp;<span class="comment"># نضيف كل رقم</span><br><span class="function">print</span>(<span class="string">f"المجموع = {total}"</span>)&nbsp;&nbsp;<span class="comment"># 55</span></div>
+
+                <h3>2. نمط العداد (Counter Pattern)</h3>
+                <div class="code-block"><span class="comment"># عد عدد الحروف المتحركة في جملة</span><br>sentence = <span class="string">"مرحباً بك في عالم البرمجة"</span><br>vowels = <span class="string">"اويأإآ"</span><br>count = <span class="number">0</span><br><br><span class="keyword">for</span> letter <span class="keyword">in</span> sentence:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> letter <span class="keyword">in</span> vowels:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += <span class="number">1</span><br><br><span class="function">print</span>(<span class="string">f"عدد الحروف المتحركة: {count}"</span>)</div>
+
+                <h3>3. نمط الفلترة (Filter Pattern)</h3>
+                <div class="code-block"><span class="comment"># احتفظ فقط بالأرقام الزوجية</span><br>numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]<br>even_numbers = []<br><br><span class="keyword">for</span> num <span class="keyword">in</span> numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;even_numbers.append(num)<br><br><span class="function">print</span>(even_numbers)&nbsp;&nbsp;<span class="comment"># [2, 4, 6, 8, 10]</span></div>
+
+                <h3>4. نمط البحث (Search Pattern)</h3>
+                <div class="code-block"><span class="comment"># البحث عن أول رقم سالب</span><br>numbers = [<span class="number">5</span>, <span class="number">3</span>, <span class="number">-2</span>, <span class="number">7</span>, <span class="number">-1</span>]<br>found = <span class="keyword">False</span><br><br><span class="keyword">for</span> num <span class="keyword">in</span> numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> num < <span class="number">0</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"وجدت أول رقم سالب: {num}"</span>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;found = <span class="keyword">True</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><br><br><span class="keyword">if</span> <span class="keyword">not</span> found:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"لم أجد أي رقم سالب"</span>)</div>
+            </div>
+
+            <hr>
+
+            <!-- Section 9: Tips and Best Practices -->
+            <div class="section">
+                <h2>💡 نصائح وأفضل الممارسات</h2>
+
+                <h3>1. اكتب تعليقات واضحة</h3>
+                <p>التعليقات تشرح ما يفعله الكود. استخدم <code>#</code> للتعليقات:</p>
+                <div class="code-block"><span class="comment"># هذا تعليق - لن يتم تنفيذه</span><br>age = <span class="number">25</span>&nbsp;&nbsp;<span class="comment"># تعليق في نفس السطر</span></div>
+
+                <h3>2. اختر أسماء متغيرات واضحة</h3>
+                <div class="code-block"><span class="comment"># ❌ سيء - غير واضح</span><br>x = <span class="number">18</span><br>y = <span class="number">25</span><br><br><span class="comment"># ✅ جيد - واضح ومفهوم</span><br>min_age = <span class="number">18</span><br>current_age = <span class="number">25</span></div>
+
+                <h3>3. قسّم المشاكل الكبيرة إلى أجزاء صغيرة</h3>
+                <p>بدلاً من محاولة حل المشكلة كلها مرة واحدة، قسمها إلى خطوات:</p>
+                <ol>
+                    <li>اقرأ المدخلات</li>
+                    <li>قم بالعمليات الحسابية</li>
+                    <li>اطبع النتيجة</li>
+                </ol>
+
+                <h3>4. اختبر كودك بقيم مختلفة</h3>
+                <p>جرب برنامجك مع:</p>
+                <ul>
+                    <li>قيم عادية</li>
+                    <li>قيم حدية (مثل 0، أصغر قيمة، أكبر قيمة)</li>
+                    <li>قيم غير متوقعة</li>
+                </ul>
+
+                <h3>5. لا تخف من الأخطاء!</h3>
+                <div class="tip-box">
+                    الأخطاء جزء طبيعي من التعلم. اقرأ رسالة الخطأ بعناية، فهي تخبرك أين المشكلة. 
+                    كل مبرمج محترف واجه آلاف الأخطاء في مسيرته!
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Section 10: Summary -->
+            <div class="section">
+                <h2>📋 ملخص سريع</h2>
+
+                <h3>المتغيرات والبيانات</h3>
+                <ul>
+                    <li>المتغير = صندوق نخزن فيه قيمة</li>
+                    <li>الأنواع الأساسية: <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code></li>
+                    <li>استخدم <code>int()</code> و <code>float()</code> لتحويل النصوص إلى أرقام</li>
+                </ul>
+
+                <h3>الإدخال والإخراج</h3>
+                <ul>
+                    <li><code>print()</code> لعرض المعلومات</li>
+                    <li><code>input()</code> لاستقبال المدخلات (تُرجع نصاً دائماً)</li>
+                    <li><code>f"النص {متغير}"</code> لدمج المتغيرات مع النصوص</li>
+                </ul>
+
+                <h3>الجمل الشرطية</h3>
+                <ul>
+                    <li><code>if</code> للشرط الأول</li>
+                    <li><code>elif</code> لشروط إضافية</li>
+                    <li><code>else</code> للحالة الافتراضية</li>
+                    <li>لا تنسَ <code>:</code> والمسافات البادئة!</li>
+                </ul>
+
+                <h3>الحلقات</h3>
+                <ul>
+                    <li><code>while</code>: تكرار طالما الشرط صحيح</li>
+                    <li><code>for</code>: تكرار على تسلسل (أرقام، حروف، إلخ)</li>
+                    <li><code>range(start, stop)</code> لتوليد أرقام</li>
+                    <li><code>break</code> للخروج من الحلقة</li>
+                    <li><code>continue</code> لتخطي الدورة الحالية</li>
+                </ul>
+
+                <h3>العمليات الشائعة</h3>
+                <ul>
+                    <li>الحسابية: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+                    <li>المقارنة: <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+                    <li>المنطقية: <code>and</code>, <code>or</code>, <code>not</code></li>
+                    <li>العضوية: <code>in</code>, <code>not in</code></li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <div class="section">
+                <h2>🎯 الخطوة التالية</h2>
+                <p style="font-size: 1.2em; text-align: center; margin: 30px 0;">
+                    الآن بعد أن تعلمت الأساسيات، حان وقت التطبيق العملي! 
+                    انتقل إلى صفحة التمارين وابدأ بحل المسائل واحدة تلو الأخرى.
+                    <br><br>
+                    تذكر: الممارسة هي المفتاح لإتقان البرمجة! 💪
+                </p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="tp02-exercises.html" class="nav-btn" style="font-size: 1.2em; padding: 15px 40px;">
+                        ابدأ التمارين الآن! 🚀
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p><strong>Computer Science 1 - TP02 Lesson</strong></p>
+            <p>Kasdi Merbah University - Ouargla</p>
+            <p>Instructor: Djezzar Moncef</p>
+        </div>
+    </div>
+</body>
+</html>

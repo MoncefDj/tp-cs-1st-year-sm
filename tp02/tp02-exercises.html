@@ -29,38 +29,58 @@
 
       /* Navigation Buttons */
       .top-navigation {
-        background: #f9f9f9;
-        padding: 15px;
+        background: linear-gradient(135deg, #5a8ef0, #89c2d9);
+        padding: 20px;
         display: flex;
         gap: 10px;
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
         flex-wrap: wrap;
         border-bottom: 2px solid #e0e0e0;
       }
 
+      .nav-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
       .nav-btn {
-        background: #5a8ef0;
-        color: white;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 1em;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
         text-decoration: none;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
       }
 
       .nav-btn:hover {
-        background: #4077d6;
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
 
-      .nav-btn.secondary {
-        background: #89c2d9;
+      .nav-btn.primary {
+        background: #f39c12;
+        color: white;
+        font-weight: 600;
       }
 
-      .nav-btn.secondary:hover {
-        background: #6ba3be;
+      .nav-btn.primary:hover {
+        background: #e67e22;
+      }
+
+      .nav-btn.home {
+        background: rgba(255, 255, 255, 0.9);
+        color: #5a8ef0;
+        font-weight: 600;
       }
 
       /* Header */
@@ -216,6 +236,17 @@
           padding: 8px 15px;
           font-size: 0.9em;
         }
+
+        .top-navigation {
+          flex-direction: column;
+          gap: 10px;
+          padding: 15px;
+        }
+
+        .nav-group {
+          width: 100%;
+          justify-content: center;
+        }
       }
 
       @media screen and (max-width: 480px) {
@@ -236,12 +267,16 @@
   </head>
   <body>
     <div class="container">
-      <!-- ! enable to see solutions -->
       <div class="top-navigation">
-        <a href="../index.html" class="nav-btn">← Back to Main</a>
-        <button class="nav-btn secondary" disabled title="Disabled for now" tabindex="-1">View Solutions</button>
+        <div class="nav-group">
+          <a href="../index.html" class="nav-btn home">🏠 Home</a>
+        </div>
+        <div class="nav-group">
+          <a href="tp02-lesson.html" class="nav-btn">📚 Lessons</a>
+          <a href="tp02-exercises.html" class="nav-btn primary">✏️ Exercises</a>
+          <a href="tp02.html" class="nav-btn" style="opacity: 0.5; pointer-events: none; cursor: not-allowed;">🔒 Solutions</a>
+        </div>
       </div>
-      <!-- ! enable to see solutions -->
 
       <div class="header">
         <h1>TP02: Python Programming Exercises</h1>
